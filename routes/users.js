@@ -4,8 +4,6 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const router = express.Router();
 
-module.exports = router;
-
 // Load User Model
 require("../models/User");
 const User = mongoose.model("users");
@@ -82,3 +80,12 @@ router.post("/register", (req, res) => {
     });
   }
 });
+
+// Logout User
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/users/login');
+});
+
+module.exports = router;
